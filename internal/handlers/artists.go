@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"bim/internal/models"
+	"bim/internal/pkg"
 	"net/http"
 	"strconv"
 )
@@ -41,15 +42,19 @@ func Artist(w http.ResponseWriter, r *http.Request) {
 	}
 	// Get the artist
 	artist, err1 := GetArtist(ID)
-	if err1 != nil {
-		errorResponse(w, http.StatusInternalServerError)
-		return
-	}
 	// Get the relation
 	relation, err2 := GetRelation(ID)
-	if err2 != nil {
+	// Get the location
+	location, err3 := GetLocation(ID)
+	// Get the date
+	date, err4 := GetDate(ID)
+	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
 		errorResponse(w, http.StatusInternalServerError)
 		return
 	}
-	renderTemplates(w, "infos", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: strconv.Itoa(ID) + " - " + artist.Name, Attr: "artists"}, ArtistOne: artist, RelationOne: relation})
+	date = pkg.ProcessDates(date)
+	location = pkg.ProcessString(location)
+	artist.FirstAlbum = pkg.FormatDate(artist.FirstAlbum)
+	relation = pkg.ProcessDatesLocations(relation)
+	renderTemplates(w, "infos", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: strconv.Itoa(ID) + " - " + artist.Name, Attr: "artists"}, ArtistOne: artist, RelationOne: relation, LocationOne: location, DateOne: date})
 }

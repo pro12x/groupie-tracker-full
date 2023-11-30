@@ -49,7 +49,35 @@
             <div class="contain left">
                 <div class="cont">
                     <h2>
-                        <span>Concert Date & Location</span>
+                        <span>Location</span>
+                    </h2>
+                    <p>
+                        {{range .LocationOne.Locations}}
+                        <span class="members">
+                             <i class="material-icons">place</i>{{.}}
+                         </span><br>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+            <div class="contain right">
+                <div class="cont">
+                    <h2>
+                        <span>Dates</span>
+                    </h2>
+                    <p>
+                        {{range .DateOne.Dates}}
+                        <span class="members">
+                             <i class="material-icons">insert_invitation</i>{{.}}
+                         </span><br>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+            <div class="contain left">
+                <div class="cont">
+                    <h2>
+                        <span>Relations</span>
                     </h2>
                     <p>
                         <dl>
