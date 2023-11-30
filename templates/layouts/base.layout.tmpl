@@ -1,0 +1,84 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">-->
+        <link rel="icon" type="image/png" href="/static/img/favicon.png">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/w3.css">
+        <title>{{index .AppInfos.PageTitle}}</title>
+    </head>
+
+    <body>
+        <!-- Preloader -->
+        <div class="preloader-container">
+            <img src="/static/img/favicon.png" alt="gtracker" width="50" height="50">
+            <h1 class="w3-allerta">
+                <span>{{index .AppInfos.AppName}}</span>
+            </h1>
+            <div class="preloader"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="container">
+            <div class="header">
+                <!--<audio id="song" src="/static/song/back.mp3"></audio>-->
+                <h1>
+                    <i class="material-icons disc w3-mobile" id="play">music_note</i>
+                    <span class="w3-mobile w3-allerta">Groupie Tracker</span>
+                    <!--Groupie Tracker-->
+                </h1>
+                <p>
+                    <span class="w3-mobile w3-allerta">Playlist</span>
+                </p>
+            </div>
+
+            <div class="topnav w3-allerta">
+                <a class="w3-mobile{{if eq .AppInfos.Attr `home`}} active{{end}}" href="/">
+                    <i class="material-icons">home</i>
+                    Home
+                </a>
+                <a class="w3-mobile{{if eq .AppInfos.Attr `artists`}} active{{end}}" href="/artists">
+                    <i class="material-icons">people</i>
+                    Artists
+                </a>
+                <a class="w3-mobile{{if eq .AppInfos.Attr `list`}} active{{end}}" href="/list">
+                    <i class="material-icons">format_list_bulleted</i>
+                    Lists
+                </a>
+                <!--<a class="w3-mobile{{if eq .AppInfos.Attr `locations`}} active{{end}}" href="/locations">
+                    <i class="material-icons">location_city</i>
+                    Locations
+                </a>
+                <a class="w3-mobile{{if eq .AppInfos.Attr `dates`}} active{{end}}" href="/dates">
+                    <i class="material-icons">insert_invitation</i>
+                    Dates
+                </a>-->
+                <!--<a class="w3-mobile{{if eq .AppInfos.Attr `search`}} active{{end}}" href="#">
+                    <i class="material-icons">travel_explore</i>
+                    Search
+                </a>-->
+                <a class="w3-mobile w3-right{{if eq .AppInfos.Attr `account`}} active{{end}}" href="#">
+                    <i class="material-icons">account_circle</i>
+                    Account
+                </a>
+            </div>
+
+            <!-- Content -->
+            {{block "content" .}}
+            {{end}}
+
+            <div class="footer">
+                <span class="w3-mobile">&copy;&nbsp;2023&nbsp;-&nbsp;Zone01&nbsp;Dakar</span>
+            </div>
+        </div>
+        <script src="/static/js/script.js"></script>
+    </body>
+    </html>
+{{ end }}

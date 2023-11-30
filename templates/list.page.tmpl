@@ -1,0 +1,94 @@
+{{ template "base" . }}
+
+{{define "content"}}
+            <div class="content w3-allerta">
+                <h1 class="w3-center w3-xxxlarge w3-mobile">
+                    <span>Lists</span>
+                    <hr>
+                </h1>
+                <div class="w3-row">
+                    <a onclick="openCity(event, 'Relations');" class="default-tab">
+                        <div class="w3-half tablink w3-bottombar w3-padding">
+                            <i class="material-icons">public</i><span>Relations</span>
+                        </div>
+                    </a>
+                    <a onclick="openCity(event, 'Locations');">
+                        <div class="w3-half tablink w3-bottombar w3-padding">
+                            <i class="material-icons">location_city</i><span>Locations</span>
+                        </div>
+                    </a>
+                    <!--<a onclick="openCity(event, 'Dates');">
+                        <div class="w3-third tablink w3-bottombar w3-padding">
+                            <i class="material-icons">insert_invitation</i><span>Dates</span>
+                        </div>
+                    </a>-->
+                </div>
+
+                <div id="Relations" class="w3-container city" style="display:none">
+                    <table class="w3-table w3-bordered w3-card-4">
+                        <tr>
+                            <th>Location</th>
+                            <th>Dates</th>
+                        </tr>
+                        <!--{{range .Relations.Index}}
+                            {{range $key, $value := .DatesLocations}}
+                            <tr>
+                                <td>{{$key}}</td>
+                                <td>
+                                    <ul>
+                                        {{range $value}}
+                                        <li>{{.}}</li>
+                                        {{end}}
+                                    </ul>
+                                </td>
+                            </tr>
+                            {{end}}
+                        {{end}}-->
+                    </table>
+                </div>
+
+                <div id="Locations" class="w3-container city" style="display:none">
+                    <div class="w3-half">
+                        <table class="w3-table w3-bordered">
+                            <tr>
+                                <th>#</th>
+                                <th>Locations</th>
+                            </tr>
+                            <!--{{range .Locations.Index}}
+                            <tr>
+                                <th>{{.ID}}</th>
+                                <td>
+                                    <ul>
+                                        {{range .Locations}}
+                                        <li>{{.}}</li>
+                                        {{end}}
+                                    </ul>
+                                </td>
+                                <td>{{.DatesURL}}</td>
+                            </tr>
+                            {{end}}-->
+                        </table>
+                    </div>
+                    <div class="w3-half">
+                        <table class="w3-table w3-bordered">
+                            <tr>
+                                <th>#</th>
+                                <th>Dates</th>
+                            </tr>
+                            <!--{{range .Dates.Index}}
+                            <tr>
+                                <th>{{.ID}}</th>
+                                <td>
+                                    <ul>
+                                        {{range .Dates}}
+                                        <li>{{.}}</li>
+                                        {{end}}
+                                    </ul>
+                                </td>
+                            </tr>
+                            {{end}}-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+{{end}}

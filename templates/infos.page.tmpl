@@ -1,0 +1,76 @@
+{{ template "base" . }}
+
+{{define "content"}}
+    <div class="content w3-allerta">
+        <h1 class="w3-center w3-xxxlarge w3-mobile title">
+            <a href="/artists" class="w3-mobile btn w3-button w3-light-grey w3-block w3-round-large back">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <span>{{index .ArtistOne.Name}}</span>
+        </h1>
+        <hr>
+        <div class="profile">
+            <!--<img src="/static/img/favicon.png" width="90">-->
+            <img src="{{index .ArtistOne.Image}}" class="w3-round-large w3-hover-opacity" alt="{{index .ArtistOne.Name}}" width="300">
+        </div>
+
+        <div class="timeline">
+            <div class="contain left">
+                <div class="cont">
+                    <h2>
+                        <span>Informations</span>
+                    </h2>
+                    <p>
+                        <span class="created">
+                            <span>
+                                <i class="material-icons">cake</i>Created in: {{index .ArtistOne.CreationDate}}
+                            </span>
+                            <span>
+                                <i class="material-icons">publish</i>First Album:&nbsp;<span class="datepicker">{{index .ArtistOne.FirstAlbum}}</span>
+                            </span>
+                         </span><br>
+                    </p>
+                </div>
+            </div>
+            <div class="contain right">
+                <div class="cont">
+                    <h2>
+                        <span>Members</span>
+                    </h2>
+                    <p>
+                        {{range .ArtistOne.Members}}
+                        <span class="members">
+                             <i class="material-icons">person</i>{{.}}
+                         </span><br>
+                        {{end}}
+                    </p>
+                </div>
+            </div>
+            <div class="contain left">
+                <div class="cont">
+                    <h2>
+                        <span>Concert Date & Location</span>
+                    </h2>
+                    <p>
+                        <dl>
+                        {{range $key, $value := .RelationOne.DatesLocations}}
+                            <dt>
+                                <span>
+                                    <i class="material-icons">place</i>{{$key}}
+                                </span>
+                            </dt>
+                            {{range $value}}
+                            <dd>
+                                <span>
+                                    <i class="material-icons">insert_invitation</i>{{.}}
+                                </span>
+                            </dd>
+                            {{end}}
+                        {{end}}
+                        </dl>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
