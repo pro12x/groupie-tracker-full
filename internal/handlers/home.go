@@ -12,8 +12,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			errorResponse(w, http.StatusNotFound)
 			return
 		}
-		renderTemplates(w, "home", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "Home", Attr: "home"}})
-	} else {
+		rand, _ := GetRandom(4)
+		renderTemplates(w, "home", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "Home", Attr: "home"}, Random: rand})
+		return
+	} /*else {
 		errorResponse(w, http.StatusMethodNotAllowed)
-	}
+	}*/
 }

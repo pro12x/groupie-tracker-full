@@ -133,6 +133,7 @@ body {
 /* ========== Content ========== */
 .content {
     padding: 0 10vw;
+    min-height: 62vh;
 }
 
 p a.btn {
@@ -147,7 +148,7 @@ p a.btn i {
     font-size: 15px;
 }
 
-h5, #f2f2f2h5 span {
+h5, h5 span {
     box-sizing: border-box;
     width: 100%;
 }
@@ -307,11 +308,11 @@ dt {
 /* ========== Infos ========== */
 
 /* ========== Search ========== */
-.search {
+.search, .home {
     height: 62vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
 }
 /* ========== Search ========== */
 

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"bim/internal/models"
+	"bim/internal/pkg"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -163,4 +164,17 @@ func GetDates() (models.Dates, error) {
 		return dates, err
 	}
 	return dates, nil
+}
+
+func GetRandom(nb int) ([]models.Artist, error) {
+	var randomArtists []models.Artist
+	for i := 0; i < nb; i++ {
+		randID := pkg.RandomID(1, 52)
+		artist, err := GetArtist(randID)
+		if err != nil {
+			return nil, err
+		}
+		randomArtists = append(randomArtists, artist)
+	}
+	return randomArtists, nil
 }
