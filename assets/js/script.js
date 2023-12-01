@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector(".preloader-container").style.display = "none";
         // Display page content
         document.querySelector(".container").style.display = "block";
-    }, 1000);
+    }, 800);
 })
 
 function openCity(evt, cityName) {

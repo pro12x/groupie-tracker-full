@@ -117,7 +117,7 @@ body {
     width: 0;
     height: 100%;
     background-color: #3498db;
-    animation: fill .9s linear infinite;
+    animation: fill 1s linear infinite;
 }
 
 @keyframes fill {
