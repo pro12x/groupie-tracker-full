@@ -13,7 +13,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		rand, _ := GetRandom(4)
-		renderTemplates(w, "home", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "Home", Attr: "home"}, Random: rand})
+		renderTemplates(w, "home", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "Home", Attr: "home"}, ArtistList: rand})
 		return
 	} /*else {
 		errorResponse(w, http.StatusMethodNotAllowed)

@@ -9,7 +9,6 @@ type MainData struct {
 	LocationOne Location  // One Location
 	Dates       Dates     // All Dates
 	DateOne     Date      // One Date
-	Random      []Artist  // Random Artists
 	AppInfos    App       // App Information
 	Error       ErrorData // Error information
 }

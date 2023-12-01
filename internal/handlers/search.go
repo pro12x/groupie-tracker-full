@@ -6,5 +6,5 @@ import (
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
-	renderTemplates(w, "search", &models.MainData{})
+	renderTemplates(w, "search", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "Search", Attr: "search"}})
 }

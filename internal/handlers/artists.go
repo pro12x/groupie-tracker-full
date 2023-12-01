@@ -18,6 +18,9 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 			errorResponse(w, http.StatusBadRequest)
 			return
 		}
+		for i := range all {
+			all[i].FirstAlbum = pkg.FormatDate(all[i].FirstAlbum)
+		}
 		renderTemplates(w, "artists", &models.MainData{AppInfos: models.App{AppName: appName, PageTitle: "List of Artists", Attr: "artists"}, ArtistList: all})
 	}
 }

@@ -10,6 +10,7 @@ import (
 	url2 "net/url"
 )
 
+// All API links
 const (
 	arts = "https://groupietrackers.herokuapp.com/api/artists"
 	art  = "https://groupietrackers.herokuapp.com/api/artists/"
@@ -166,6 +167,7 @@ func GetDates() (models.Dates, error) {
 	return dates, nil
 }
 
+// GetRandom returns a slice of random artists
 func GetRandom(nb int) ([]models.Artist, error) {
 	var randomArtists []models.Artist
 	for i := 0; i < nb; i++ {
