@@ -46,14 +46,37 @@ func ProcessString(model models.Location) models.Location {
 
 // ProcessDatesLocations processes the dates and locations in the model
 func ProcessDatesLocations(model models.Relation) models.Relation {
+	newMap := make(map[string][]string)
 	for old, dates := range model.DatesLocations {
+		newDates := make([]string, len(dates))
 		key := FormatString(old)
-		model.DatesLocations[key] = dates
-		delete(model.DatesLocations, old)
-		/*for i, date := range dates {
-			model.DatesLocations[key][i] = strings.TrimPrefix(date, "*")
-			model.DatesLocations[key][i] = FormatDate(model.DatesLocations[key][j])
-		}*/
+		for i, date := range dates {
+			/*model.DatesLocations[old][i] = strings.TrimPrefix(date, "*")
+			model.DatesLocations[old][i] = FormatDate(model.DatesLocations[old][i])*/
+			newDates[i] = FormatDate(date)
+		}
+		newMap[key] = newDates
 	}
+	model.DatesLocations = newMap
+	return model
+}
+
+// ProcessDatesLocations processes the dates and locations in the model
+func ProcessDatesLocation(model models.Relation) models.Relation {
+	// Use a map instead of a struct to make the code more efficient
+	newDatesLocations := make(map[string][]string)
+
+	for old, dates := range model.DatesLocations {
+		newDates := make([]string, len(dates))
+		key := FormatString(old)
+
+		for i, date := range dates {
+			newDates[i] = FormatDate(strings.TrimPrefix(date, "*"))
+		}
+
+		newDatesLocations[key] = newDates
+	}
+
+	model.DatesLocations = newDatesLocations
 	return model
 }
