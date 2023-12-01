@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 1000);
 })
 
+// Tabs
 function openCity(evt, cityName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("city");
