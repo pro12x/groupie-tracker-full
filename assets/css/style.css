@@ -306,6 +306,15 @@ dt {
 }
 /* ========== Infos ========== */
 
+/* ========== Search ========== */
+.search {
+    height: 62vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ========== Search ========== */
+
 /* ========== Footer ========== */
 .footer {
     display: flex;
@@ -360,7 +369,6 @@ dt {
     -webkit-font-smoothing: antialiased;
 }
 /* ========== Fonts ========== */
-
 
 /* ========== Responsive design ========== */
 @media only screen and (max-width: 1400px) {

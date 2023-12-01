@@ -10,6 +10,7 @@ import (
 
 // FormatDate returns a formatted date
 func FormatDate(date string) string {
+	date = strings.TrimPrefix(date, "*")
 	format, err := time.Parse("02-01-2006", date)
 	if err != nil {
 		fmt.Println("Error parsing date:", err)
@@ -32,17 +33,13 @@ func FormatString(str string) string {
 	str = reg.ReplaceAllString(str, " ")
 	reg1 := regexp.MustCompile(`[-]`)
 	str = reg1.ReplaceAllString(str, " - ")
+	str = strings.Title(str)
 	return str
-}
-
-func Capitalize(str string) string {
-	return strings.Title(str)
 }
 
 func ProcessString(model models.Location) models.Location {
 	for i, location := range model.Locations {
 		model.Locations[i] = FormatString(location)
-		model.Locations[i] = Capitalize(model.Locations[i])
 	}
 	return model
 }
@@ -51,7 +48,6 @@ func ProcessString(model models.Location) models.Location {
 func ProcessDatesLocations(model models.Relation) models.Relation {
 	for old, dates := range model.DatesLocations {
 		key := FormatString(old)
-		key = Capitalize(key)
 		model.DatesLocations[key] = dates
 		delete(model.DatesLocations, old)
 		/*for i, date := range dates {

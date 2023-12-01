@@ -33,6 +33,7 @@ func Run(tab []string) {
 		router.HandleFunc("/artists", handlers.Artists)
 		router.HandleFunc("/artist/", handlers.Artist)
 		router.HandleFunc("/list", handlers.List)
+		router.HandleFunc("/search", handlers.Search)
 
 		// Lancement du serveur d'application
 		fmt.Println("Server started on port http://localhost" + appConfig.Port)
