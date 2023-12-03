@@ -2,8 +2,18 @@
 
 {{define "content"}}
     <div class="content">
-        <div class="input-search">
+        <!--<div class="input-search">
             <input type="search" name="search" id="search">
+        </div>-->
+        <div id="myOverlay" class="overlay">
+            <span class="closebtn" onclick="closeSearch()" title="Close Search Bar"><i class="material-icons">close</i></span>
+            <div class="overlay-content">
+                <div class="input-search">
+                    <input type="text" placeholder="Search.." name="search">
+                    <div class="result">Here</div>
+                    <button type="submit"><i class="material-icons"></i></button>
+                </div>
+            </div>
         </div>
     </div>
 {{end}}

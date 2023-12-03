@@ -8,6 +8,8 @@ import (
 	"io"
 	"net/http"
 	url2 "net/url"
+	"strconv"
+	"strings"
 )
 
 // All API links
@@ -179,4 +181,80 @@ func GetRandom(nb int) ([]models.Artist, error) {
 		randomArtists = append(randomArtists, artist)
 	}
 	return randomArtists, nil
+}
+
+// GetSearch returns all search results
+func GetSearch(query string, artists []models.Artist) models.Search {
+	if len(query) == 0 || query == " " {
+		return models.Search{}
+	}
+	var artistMap = make(map[string]models.SearchArtist)
+	var memberMap = make(map[string]models.SearchMember)
+	var locationMap = make(map[string]models.SearchLocation)
+	var firstAlbumMap = make(map[string]models.SearcFirstAlbum)
+	var creationDateMap = make(map[string]models.SearchCreationDate)
+
+	query = strings.ToLower(query)
+	for _, artist := range artists {
+		name := strings.ToLower(artist.Name)
+		firstAlbum := strings.ToLower(artist.FirstAlbum)
+		creationDate := strconv.Itoa(int(artist.CreationDate))
+
+		if strings.Contains(name, query) {
+			artistMap[artist.Name+" - artist/band"] = models.SearchArtist{ID: artist.ID, Value: artist.Name + " - artist/band"}
+		}
+
+		for _, member := range artist.Members {
+			memberName := strings.ToLower(member)
+
+			// If Artist is the same as member
+			if memberName == name {
+				continue
+			}
+
+			if strings.Contains(memberName, query) {
+				memberMap[member+" - member"] = models.SearchMember{ID: artist.ID, Value: member + " - member"}
+			}
+
+			if strings.Contains(firstAlbum, query) {
+				firstAlbumMap[artist.Name+" - first album - "+artist.FirstAlbum] = models.SearcFirstAlbum{ID: artist.ID, Value: artist.Name + " - first album - " + artist.FirstAlbum}
+			}
+
+			if strings.Contains(creationDate, query) {
+				creationDateMap[artist.Name+" - created in "+creationDate] = models.SearchCreationDate{ID: artist.ID, Value: artist.Name + " - created in " + creationDate}
+			}
+		}
+
+		for location := range artist.RelationsOne.DatesLocations {
+			location = strings.ToLower(location)
+			if strings.Contains(location, query) {
+				locationMap[location+" - "+artist.Name] = models.SearchLocation{ID: artist.ID, Value: pkg.FormatString(location) + " - " + artist.Name}
+			}
+		}
+	}
+	var artistSlice []models.SearchArtist
+	for _, result := range artistMap {
+		artistSlice = append(artistSlice, result)
+	}
+
+	var memberSlice []models.SearchMember
+	for _, result := range memberMap {
+		memberSlice = append(memberSlice, result)
+	}
+
+	var locationSlice []models.SearchLocation
+	for _, result := range locationMap {
+		locationSlice = append(locationSlice, result)
+	}
+
+	var firstAlbumSlice []models.SearcFirstAlbum
+	for _, result := range firstAlbumMap {
+		firstAlbumSlice = append(firstAlbumSlice, result)
+	}
+
+	var creationDateSlice []models.SearchCreationDate
+	for _, result := range creationDateMap {
+		creationDateSlice = append(creationDateSlice, result)
+	}
+	return models.Search{}
 }

@@ -25,7 +25,7 @@ body {
 
 /* ============ Header ============ */
 .header {
-    padding: 30px;
+    padding: 20px;
     text-align: center;
     background: #f2f2f2;
     color: #202b38;
@@ -36,6 +36,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .5s ease-in-out;
 }
 
 .disc {
@@ -48,6 +49,15 @@ body {
     background: #202b38;
     color: #f2f2f2;
     animation: spin 10s linear infinite;
+}
+
+input.w3-input {
+    background: #f2f2f2;
+}
+
+input.w3-input:focus {
+    /*box-shadow: 0 2px 5px 0 rgba(32, 43, 56, 1);*/
+    outline: none
 }
 
 @keyframes spin {
@@ -134,6 +144,7 @@ body {
 .content {
     padding: 0 10vw;
     min-height: 62vh;
+    margin-bottom: 80px;
 }
 
 p a.btn {
@@ -308,12 +319,6 @@ dt {
 /* ========== Infos ========== */
 
 /* ========== Search ========== */
-.search, .home {
-    height: 62vh;
-    display: flex;
-    justify-content: center;
-    /*align-items: center;*/
-}
 /* ========== Search ========== */
 
 /* ========== Footer ========== */
@@ -327,6 +332,8 @@ dt {
     padding: 24px 10vw;
     margin: 12px 0 0 0;
     z-index: 2;
+    position: fixed;
+    bottom: 0;
 }
 
 .footer span {
@@ -336,7 +343,6 @@ dt {
 /* ========== Footer ========== */
 
 /* ========== Fonts ========== */
-/* fallback */
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
@@ -345,7 +351,6 @@ dt {
     src: url(../fonts/material.woff2) format('woff2');
 }
 
-/* latin */
 @font-face {
     font-family: 'Allerta Stencil';
     font-style: normal;
@@ -405,6 +410,24 @@ dt {
 
     .right {
         left: 0;
+    }
+
+    .header h1 {
+        font-size: 25px;
+        transition: .5s ease-in-out;
+        flex-direction: column;
+    }
+
+    .topnav {
+        position: initial;
+    }
+
+    .footer {
+        position: initial;
+    }
+
+    .content {
+        margin-bottom: 0;
     }
 }
 /* ========== Responsive design ========== */

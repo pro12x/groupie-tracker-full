@@ -28,14 +28,15 @@
         <!-- Content -->
         <div class="container">
             <div class="header">
-                <!--<audio id="song" src="/static/song/back.mp3"></audio>-->
                 <h1>
                     <i class="material-icons disc w3-mobile" id="play">music_note</i>
                     <span class="w3-mobile w3-allerta">Groupie Tracker</span>
-                    <!--Groupie Tracker-->
                 </h1>
                 <p>
-                    <span class="w3-mobile w3-allerta">Playlist</span>
+                    <span class="w3-mobile w3-allerta">
+                        <input class="w3-input" type="search" name="search" placeholder="Searche here..." id="search">
+                        <span id="suggestions"></span>
+                    </span>
                 </p>
             </div>
 
@@ -60,9 +61,9 @@
                     <i class="material-icons">insert_invitation</i>
                     Dates
                 </a>-->
-                <a class="w3-mobile w3-right{{if eq .AppInfos.Attr `search`}} active{{end}}"  href="/search">
-                    <i class="material-icons">travel_explore</i>
-                    Search
+                <a class="w3-mobile w3-right {{if eq .AppInfos.Attr `account`}}active{{end}}"  href="#">
+                    <i class="material-icons">person</i>
+                    Account
                 </a>
                 <!--<a class="w3-mobile w3-right{{if eq .AppInfos.Attr `search`}} active{{end}}" href="/search">
                     <i class="material-icons">account_circle</i>
