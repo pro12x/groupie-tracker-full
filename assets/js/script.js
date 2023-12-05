@@ -46,7 +46,7 @@ function Search() {
     fetch(api)
         .then((response) => {
             if (response.status === 204) {
-                result.innerHTML = "No content found for "
+                result.innerHTML = "No content found for " + search
                 result.style.display = "block"
                 // return
             }
@@ -61,6 +61,12 @@ function Search() {
             result.style.display = "block"
             result.scrollTop = 0
 
+            /*document.addEventListener("click", function (event) {
+                if (!result.contains(event.target)) {
+                    result.style.display = "none"
+                    document.querySelector("#search").value = ""
+                }
+            })*/
             document.addEventListener("click", function (event) {
                 if (!result.contains(event.target)) {
                     result.style.display = "none"
@@ -105,15 +111,11 @@ function Search() {
                 }
             }
 
-            // console.log(Suggestion("Artist/Band", data.searchArtist))
+            // Displaying suggestions
             Suggestion("Artist/Band", data.artists)
-            // console.log(Suggestion("Members", data.searchMember))
             Suggestion("Members", data.members)
-            // console.log(Suggestion("Locations", data.searchLocation))
             Suggestion("Locations", data.locations)
-            // console.log(Suggestion("First Albums", data.searchFirstAlbum))
             Suggestion("First Albums", data.firstAlbums)
-            // console.log(Suggestion("Creation Dates", data.searchCreationDate))
             Suggestion("Creation Dates", data.creationDates)
         }
     )

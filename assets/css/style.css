@@ -60,6 +60,17 @@ input.w3-input:focus {
     outline: none
 }
 
+.floating-result {
+    position: fixed;
+    top: 150px;
+    z-index: 3;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    max-height: 200px; /* Ajoutez une hauteur maximale si nécessaire */
+    overflow-y: auto; /* Ajoutez un défilement vertical si nécessaire */
+    display: none; /* Masquer initialement la div flottante */
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -428,6 +439,10 @@ dt {
 
     .content {
         margin-bottom: 0;
+    }
+
+    .floating-result {
+        top: 165px;
     }
 }
 /* ========== Responsive design ========== */
