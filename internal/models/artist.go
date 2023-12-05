@@ -11,5 +11,4 @@ type Artist struct {
 	LocationsURL    string   `json:"locations"`
 	ConcertDatesURL string   `json:"concertDates"`
 	RelationsURL    string   `json:"relations"`
-	RelationsOne    Relation
 }

@@ -24,8 +24,8 @@ const (
 	loc  = "https://groupietrackers.herokuapp.com/api/locations/"
 )
 
-// getJSON returns data from API
-func getJSON(url string) ([]byte, error) {
+// GetJSON returns data from API
+func GetJSON(url string) ([]byte, error) {
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
@@ -50,7 +50,7 @@ func GetArtist(id int) (models.Artist, error) {
 	var artist models.Artist
 	idStr := fmt.Sprintf("%d", id)
 	url := art + url2.PathEscape(idStr)
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	if err != nil {
 		return artist, err
 	}
@@ -64,7 +64,7 @@ func GetArtist(id int) (models.Artist, error) {
 // GetArtists returns a list of artists
 func GetArtists() ([]models.Artist, error) {
 	url := arts
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	var artists []models.Artist
 	if err != nil {
 		return artists, err
@@ -81,7 +81,7 @@ func GetRelation(id int) (models.Relation, error) {
 	var relation models.Relation
 	idStr := fmt.Sprintf("%d", id)
 	url := rel + url2.PathEscape(idStr)
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	if err != nil {
 		return relation, err
 	}
@@ -95,7 +95,7 @@ func GetRelation(id int) (models.Relation, error) {
 // GetRelations returns a list of relations
 func GetRelations() (models.Relations, error) {
 	url := rels
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	var relations models.Relations
 	if err != nil {
 		return relations, err
@@ -112,7 +112,7 @@ func GetLocation(id int) (models.Location, error) {
 	var location models.Location
 	idStr := fmt.Sprintf("%d", id)
 	url := loc + url2.PathEscape(idStr)
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	if err != nil {
 		return location, err
 	}
@@ -126,7 +126,7 @@ func GetLocation(id int) (models.Location, error) {
 // GetLocations returns a list of locations
 func GetLocations() (models.Locations, error) {
 	url := locs
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	var locations models.Locations
 	if err != nil {
 		return locations, err
@@ -143,7 +143,7 @@ func GetDate(id int) (models.Date, error) {
 	var date models.Date
 	idStr := fmt.Sprintf("%d", id)
 	url := dat + url2.PathEscape(idStr)
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	if err != nil {
 		return date, err
 	}
@@ -157,7 +157,7 @@ func GetDate(id int) (models.Date, error) {
 // GetDates returns a list of dates
 func GetDates() (models.Dates, error) {
 	url := dats
-	body, err := getJSON(url)
+	body, err := GetJSON(url)
 	var dates models.Dates
 	if err != nil {
 		return dates, err
@@ -199,6 +199,7 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 		name := strings.ToLower(artist.Name)
 		firstAlbum := strings.ToLower(artist.FirstAlbum)
 		creationDate := strconv.Itoa(int(artist.CreationDate))
+		var relation, _ = GetRelation(int(artist.ID))
 
 		if strings.HasPrefix(name, query) {
 			artistMap[artist.Name+" - artist/band"] = models.SearchArtist{ID: artist.ID, Value: artist.Name + " - artist/band"}
@@ -225,10 +226,12 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 			}
 		}
 
-		for location := range artist.RelationsOne.DatesLocations {
+		// for location := range artist.RelationsOne.DatesLocations {
+		for location := range relation.DatesLocations {
 			location = strings.ToLower(location)
 			if strings.Contains(location, query) {
-				locationMap[location+" - "+artist.Name] = models.SearchLocation{ID: artist.ID, Value: pkg.FormatString(location) + " - " + artist.Name}
+				// locationMap[location+" - "+artist.Name] = models.SearchLocation{ID: artist.ID, Value: pkg.FormatString(location) + " - " + artist.Name}
+				locationMap[location+" - "+artist.Name] = models.SearchLocation{ID: artist.ID, Value: location + " - " + artist.Name}
 			}
 		}
 	}
