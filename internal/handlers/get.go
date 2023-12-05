@@ -200,7 +200,7 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 		firstAlbum := strings.ToLower(artist.FirstAlbum)
 		creationDate := strconv.Itoa(int(artist.CreationDate))
 
-		if strings.Contains(name, query) {
+		if strings.HasPrefix(name, query) {
 			artistMap[artist.Name+" - artist/band"] = models.SearchArtist{ID: artist.ID, Value: artist.Name + " - artist/band"}
 		}
 
@@ -212,7 +212,7 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 				continue
 			}
 
-			if strings.Contains(memberName, query) {
+			if strings.HasPrefix(memberName, query) {
 				memberMap[member+" - member"] = models.SearchMember{ID: artist.ID, Value: member + " - member"}
 			}
 
@@ -220,7 +220,7 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 				firstAlbumMap[artist.Name+" - first album - "+artist.FirstAlbum] = models.SearcFirstAlbum{ID: artist.ID, Value: artist.Name + " - first album - " + artist.FirstAlbum}
 			}
 
-			if strings.Contains(creationDate, query) {
+			if strings.HasPrefix(creationDate, query) {
 				creationDateMap[artist.Name+" - created in "+creationDate] = models.SearchCreationDate{ID: artist.ID, Value: artist.Name + " - created in " + creationDate}
 			}
 		}
@@ -256,5 +256,5 @@ func GetSearch(query string, artists []models.Artist) models.Search {
 	for _, result := range creationDateMap {
 		creationDateSlice = append(creationDateSlice, result)
 	}
-	return models.Search{}
+	return models.Search{Artists: artistSlice, Members: memberSlice, Locations: locationSlice, FirstAlbums: firstAlbumSlice, CreationDates: creationDateSlice}
 }

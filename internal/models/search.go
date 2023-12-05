@@ -2,11 +2,11 @@ package models
 
 // Search : Search struct
 type Search struct {
-	Artists       []SearchArtist       `json:"searchArtist"`
-	Members       []SearchMember       `json:"searchMember"`
-	Locations     []SearchLocation     `json:"searchLocation"`
-	FirstAlbums   []SearcFirstAlbum    `json:"searchFirstAlbums"`
-	CreationDates []SearchCreationDate `json:"searchCreationDates"`
+	Artists       []SearchArtist       `json:"artists"`
+	Members       []SearchMember       `json:"members"`
+	Locations     []SearchLocation     `json:"locations"`
+	FirstAlbums   []SearcFirstAlbum    `json:"firstAlbums"`
+	CreationDates []SearchCreationDate `json:"creationDates"`
 }
 
 type SearchArtist struct {

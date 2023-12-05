@@ -30,3 +30,91 @@ window.onload = function() {
         defaultTab.click();
     }
 };
+
+// Search function
+function Search() {
+    var search = document.querySelector('#search').value
+    var result = document.querySelector('#result')
+    const api = `/search?q=${encodeURIComponent(search)}`
+
+    if(search === "") {
+        result.style.display = "none";
+        return
+    }
+
+    // fetch("/search?q=" + encodeURIComponent(search))
+    fetch(api)
+        .then((response) => {
+            if (response.status === 204) {
+                result.innerHTML = "No content found for "
+                result.style.display = "block"
+                // return
+            }
+            return response.json()
+        }).then((data) => {
+            if(!data) {
+                return
+            }
+
+            // var result = document.querySelector('#result');
+            result.innerHTML = ""
+            result.style.display = "block"
+            result.scrollTop = 0
+
+            document.addEventListener("click", function (event) {
+                if (!result.contains(event.target)) {
+                    result.style.display = "none"
+                    document.querySelector("#search").value = ""
+                }
+            })
+
+            function Category(title) {
+                var div = document.createElement("div")
+                div.textContent = title
+                div.style.fontWeight = "bold"
+                div.style.textAlign = "center"
+                div.style.color = "red"
+                div.style.backgroundColor = "green"
+                return div
+            }
+
+            function Result(suggestion) {
+                var div = document.createElement("div");
+                div.textContent = suggestion.value;
+                div.onclick = function () {
+                    window.location.href = "/artist/" + suggestion.id;
+                };
+                return div;
+            }
+
+            function Suggestion(category, resutls) {
+                if(resutls !== null) {
+                    resutls.sort(function (a, b) {
+                        return a.value.localeCompare(b.value)
+                    })
+
+                    result.appendChild(
+                        Category(category)
+                    )
+
+                    for(let i = 0; i < resutls.length; i++) {
+                        result.appendChild(
+                            Result(resutls[i])
+                        )
+                    }
+                }
+            }
+
+            // console.log(Suggestion("Artist/Band", data.searchArtist))
+            Suggestion("Artist/Band", data.artists)
+            // console.log(Suggestion("Members", data.searchMember))
+            Suggestion("Members", data.members)
+            // console.log(Suggestion("Locations", data.searchLocation))
+            Suggestion("Locations", data.locations)
+            // console.log(Suggestion("First Albums", data.searchFirstAlbum))
+            Suggestion("First Albums", data.firstAlbums)
+            // console.log(Suggestion("Creation Dates", data.searchCreationDate))
+            Suggestion("Creation Dates", data.creationDates)
+        }
+    )
+}
