@@ -33,9 +33,9 @@ window.onload = function() {
 
 // Search function
 function Search() {
-    var search = document.querySelector('#search').value
-    var result = document.querySelector('#result')
-    const api = `/search?q=${encodeURIComponent(search)}`
+    let search = document.querySelector('#search').value;
+    let result = document.querySelector('#result');
+    const api = `/search?q=${encodeURIComponent(search)}`;
 
     if(search === "") {
         result.style.display = "none";

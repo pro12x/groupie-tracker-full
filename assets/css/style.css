@@ -62,10 +62,10 @@ input.w3-input:focus {
 
 .floating-result {
     position: fixed;
-    top: 150px;
+    top: 155px;
     z-index: 3;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    background: #202b38;
+    color: #f2f2f2;
     max-height: 200px; /* Ajoutez une hauteur maximale si nécessaire */
     overflow-y: auto; /* Ajoutez un défilement vertical si nécessaire */
     display: none; /* Masquer initialement la div flottante */
